@@ -1,6 +1,6 @@
-module Text.Megaparsec.MBox.Ext.GMail where
+module Text.Megaparsec.MBox.Ext.GMail.Types where
 
 import Text.Megaparsec.MBox.Types
 
-type GMailLabals = [String]
+type GMailLabels = [String]
 
