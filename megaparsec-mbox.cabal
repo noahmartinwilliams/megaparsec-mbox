@@ -29,6 +29,7 @@ library
       Text.Megaparsec.MBox.DateTime
       Text.Megaparsec.MBox.Ext.GMail
       Text.Megaparsec.MBox.Ext.GMail.Types
+      Text.Megaparsec.MBox.From
       Text.Megaparsec.MBox.Space
       Text.Megaparsec.MBox.Types
   other-modules:

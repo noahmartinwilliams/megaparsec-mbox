@@ -22,7 +22,7 @@ mboxArcVar = do
     void $ S.lexeme (char '=')
     val <- S.lexeme (some (noneOf ";="))
     let val' = Prelude.filter (isNotSpace) val
-    return (key, val)
+    return (key, val')
 
 isNotSpace :: Char -> Bool
 isNotSpace '\n' = False

@@ -9,6 +9,11 @@ import Text.Megaparsec.MBox.Types
 sc :: MBoxParser ()
 sc = L.space space1 Text.Megaparsec.empty Text.Megaparsec.empty
 
+hsc :: MBoxParser ()
+hsc = L.space hspace1 Text.Megaparsec.empty Text.Megaparsec.empty
+
 lexeme :: MBoxParser a -> MBoxParser a
 lexeme = L.lexeme sc
 
+hlexeme :: MBoxParser a -> MBoxParser a
+hlexeme = L.lexeme hsc
