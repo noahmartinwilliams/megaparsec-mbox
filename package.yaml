@@ -36,8 +36,9 @@ ghc-options:
 library:
   source-dirs: src
   dependencies:
-  - megaparsec
   - containers
+  - megaparsec
+  - megaparsec-email-address
   - text
 
 tests:

@@ -65,3 +65,7 @@ packages:
 #
 # Allow a newer minor version of GHC than the snapshot specifies
 # compiler-check: newer-minor
+
+extra-deps:
+- git: https://github.com/noahmartinwilliams/megaparsec-email-address.git
+  commit: 990c311e2ffbc3a7a6cbad86130c08514ec48310
