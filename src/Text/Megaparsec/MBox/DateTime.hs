@@ -48,6 +48,11 @@ mboxDD = do
 mboxDOM :: MBoxParser Int
 mboxDOM = mboxDD
 
+mboxDOM' :: MBoxParser Int
+mboxDOM' = do
+    num <- some digitChar
+    return (read num :: Int)
+
 mboxTime :: MBoxParser (Int, Int, Int)
 mboxTime = do
     hours <- mboxDD
@@ -72,6 +77,15 @@ mboxYear = do
     y <- Text.Megaparsec.count 4 digitChar -- update this to five digits in 7974 years
     return (read y :: Int)
 
+mboxTimeZone :: MBoxParser Int
+mboxTimeZone = do
+    void $ single '('
+    tz <- (string "PST" <|> string "CST") -- TODO: add more time zones.
+    void $ single ')'
+    case tz of
+        "PST" -> return (-7)
+        "CST" -> return (-6)
+
 mboxFromDT :: MBoxParser DateTime
 mboxFromDT = do
     dow <- S.lexeme mboxDOW
@@ -81,3 +95,17 @@ mboxFromDT = do
     off <- S.lexeme mboxTimeOffset
     year <- S.lexeme mboxYear
     return (DateTime { dtYear = year, dtMonth = mon, dtDOW=dow, dtHour = hour, dtMinute = minute, dtSecond = second, dtOffset = off})
+
+mboxReceivedDT :: MBoxParser DateTime
+mboxReceivedDT = do
+    dow <- S.lexeme mboxDOW
+    void $ S.lexeme (single ',')
+    dom <- S.lexeme mboxDOM'
+    mon <- S.lexeme mboxMonth
+    year <- S.lexeme (mboxYear)
+    (hour, minute, second) <- S.lexeme mboxTime
+    off <- S.lexeme mboxTimeOffset
+    void $ S.lexeme mboxTimeZone
+    return (DateTime { dtYear = year, dtMonth = mon, dtDOW = dow, dtHour = hour, dtMinute = minute, dtSecond = second, dtOffset = off})
+
+

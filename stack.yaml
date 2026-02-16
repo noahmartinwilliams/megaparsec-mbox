@@ -69,3 +69,5 @@ packages:
 extra-deps:
 - git: https://github.com/noahmartinwilliams/megaparsec-email-address.git
   commit: 990c311e2ffbc3a7a6cbad86130c08514ec48310
+- git: https://github.com/noahmartinwilliams/megaparsec-ip.git
+  commit: 0a2924a7cbf14b325ba11382618f949d51de2999

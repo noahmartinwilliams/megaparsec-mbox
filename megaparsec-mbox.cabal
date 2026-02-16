@@ -30,6 +30,7 @@ library
       Text.Megaparsec.MBox.Ext.GMail
       Text.Megaparsec.MBox.Ext.GMail.Types
       Text.Megaparsec.MBox.From
+      Text.Megaparsec.MBox.Received
       Text.Megaparsec.MBox.Space
       Text.Megaparsec.MBox.Types
   other-modules:
@@ -42,8 +43,10 @@ library
   build-depends:
       base >=4.7 && <5
     , containers
+    , iproute
     , megaparsec
     , megaparsec-email-address
+    , megaparsec-ip
     , text
   default-language: Haskell2010
 
