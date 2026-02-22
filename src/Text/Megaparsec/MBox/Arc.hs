@@ -16,11 +16,24 @@ mboxArcSeal = do
     vars <- S.lexeme mboxArcVars
     return (M.fromList vars)
 
+mboxArcMessageSignature :: MBoxParser (M.Map String String, String)
+mboxArcMessageSignature = do
+    void $ S.lexeme (string "ARC-Message-Signature:")
+    vars <- S.lexeme mboxArcVars
+    void $ S.lexeme (single ';')
+    void $ string "dara"
+    void $ single '='
+    dara <- some (anySingleBut '\n')
+    void $ eol
+    return (M.fromList vars, dara)
+
+
 mboxArcVar :: MBoxParser (String, String)
 mboxArcVar = do
     key <- S.lexeme (some alphaNumChar)
     void $ S.lexeme (char '=')
     val <- S.lexeme (some (noneOf ";="))
+    void $ optional (string "=")
     let val' = Prelude.filter (isNotSpace) val
     return (key, val')
 
@@ -32,6 +45,7 @@ isNotSpace _ = True
 
 mboxArcVars :: MBoxParser [(String, String)]
 mboxArcVars = do
-    arcVars <- S.lexeme (endBy1 (sepBy mboxArcVar (S.lexeme (single ';')) ) (string "=="))
+    arcVars <- S.lexeme (endBy1 (sepBy mboxArcVar (S.lexeme (single ';')) ) ((string "=") <|> (string "==")))
     return (Prelude.foldr (++) [] arcVars)
+
 
