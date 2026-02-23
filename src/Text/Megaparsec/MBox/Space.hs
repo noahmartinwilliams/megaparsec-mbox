@@ -17,3 +17,10 @@ lexeme = L.lexeme sc
 
 hlexeme :: MBoxParser a -> MBoxParser a
 hlexeme = L.lexeme hsc
+
+isNotSpace :: Char -> Bool
+isNotSpace '\n' = False
+isNotSpace ' ' = False
+isNotSpace '\t' = False
+isNotSpace _ = True
+

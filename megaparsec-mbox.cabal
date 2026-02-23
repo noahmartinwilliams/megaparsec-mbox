@@ -28,6 +28,7 @@ library
       Text.Megaparsec.MBox.Arc
       Text.Megaparsec.MBox.DateTime
       Text.Megaparsec.MBox.Delivered
+      Text.Megaparsec.MBox.DKIM
       Text.Megaparsec.MBox.Ext.GMail
       Text.Megaparsec.MBox.Ext.GMail.Types
       Text.Megaparsec.MBox.From

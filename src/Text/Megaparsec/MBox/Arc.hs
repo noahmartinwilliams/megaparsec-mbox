@@ -37,12 +37,6 @@ mboxArcVar = do
     let val' = Prelude.filter (isNotSpace) val
     return (key, val')
 
-isNotSpace :: Char -> Bool
-isNotSpace '\n' = False
-isNotSpace ' ' = False
-isNotSpace '\t' = False
-isNotSpace _ = True
-
 mboxArcVars :: MBoxParser [(String, String)]
 mboxArcVars = do
     arcVars <- S.lexeme (endBy1 (sepBy mboxArcVar (S.lexeme (single ';')) ) ((string "=") <|> (string "==")))
