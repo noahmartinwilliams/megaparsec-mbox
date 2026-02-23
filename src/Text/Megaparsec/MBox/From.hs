@@ -7,6 +7,7 @@ import Text.Megaparsec
 import Text.Megaparsec.Char
 import Text.Megaparsec.EmailAddress
 import Text.Megaparsec.MBox.DateTime
+import Text.Megaparsec.MBox.EAddr
 import Text.Megaparsec.MBox.Space
 import Text.Megaparsec.MBox.Types
 
@@ -38,16 +39,7 @@ mboxSecondFrom = do
     void $ lexeme (single ':')
     name <- lexeme mboxFromName
     void $ single '<'
-    inp <- getInput
-    off <- getOffset
-    st <- getParserState
-    let (st', addr) = runParser' eaddr st
-    updateParserState (\_ -> st')
-    if isLeft addr
-    then
-        let (Left e) = addr in fancyFailure (Set.fromList [(ErrorFail ("Invalid email Address. " ++ (errorBundlePretty e)))])
-    else do
-        let (Right a) = addr
-        void $ single '>'
-        return (name, a)
+    addr <- mboxEAddr
+    void $ single '>'
+    return (name, addr)
 

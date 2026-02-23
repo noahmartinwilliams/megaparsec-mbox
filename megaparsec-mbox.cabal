@@ -29,10 +29,12 @@ library
       Text.Megaparsec.MBox.DateTime
       Text.Megaparsec.MBox.Delivered
       Text.Megaparsec.MBox.DKIM
+      Text.Megaparsec.MBox.EAddr
       Text.Megaparsec.MBox.Ext.GMail
       Text.Megaparsec.MBox.Ext.GMail.Types
       Text.Megaparsec.MBox.From
       Text.Megaparsec.MBox.Received
+      Text.Megaparsec.MBox.ReturnPath
       Text.Megaparsec.MBox.Space
       Text.Megaparsec.MBox.Types
   other-modules:
